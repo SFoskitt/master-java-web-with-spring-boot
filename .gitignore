@@ -1,0 +1,9 @@
+**/.classpath
+**/mvnw
+**/.mvnrw
+**/mvnw.cmd
+**/.settings/
+**/.mvn/
+**/.project
+**/META-INF/
+**/target/
