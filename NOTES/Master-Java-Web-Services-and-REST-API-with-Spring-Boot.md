@@ -683,6 +683,126 @@ What do I recommend: He's sitting on the fence for now
 
 ==============================
 
+## Step 00 - Creating a rest api with SB
+
+- why spring boot?
+- how to build a great rest api?
+  - how to identify resources
+  - identifying actions
+  - defining request and response structures
+  - using appropriate response status
+  - rest api best practices
+
+1. Build 3 simple hellow world rest api
+  - understand the magic of spring boot
+  - understand fundamentals of building rest api with spring boot
+
+2. build a rest api for social media application
+  - design and build a great rest api
+    - choosing the right uri for resources (/users, /users/{id}, /users/{id}/posts)
+    - choosing the right request method for actions (GET, POST, PUT, DELETE)
+    - designing request and response structures
+    - implementing security, validation and exception handling
+  - build advanced rest api features
+    - internationalization, HATEOAS, versioning, documentation, content negotiation
+
+3. connect your rest api to a database
+   - fundamentals of JPA and hibernate
+   - use H2 as an in memory database
+
+
+## Step 01 - initializing a rest api project with spring boot
+
+
+## Step 02 - Creating a Hello World REST API with Spring Boot
+
+NOTE: for some reason the Spring Boot Devtools was not reloading on changes to this file - tried almost all of these things:
+https://stackoverflow.com/questions/39738901/how-do-i-activate-a-spring-boot-profile-when-running-from-intellij
+https://intellij-support.jetbrains.com/hc/en-us/community/posts/4404522882450-Spring-Boot-DevTools-Live-Reload-Not-Working
+
+
+create a new package then add a new java class HelloWorldController.java
+
+Spring annotation on the method in this controller is:
+```java
+    @RequestMapping(method = RequestMethod.GET, path = "/hello-world")
+```
+This can be simplified to:
+```java
+  @GetMapping(path = "/hello-world")
+```
+THIS WILL CHANGE THE IMPORTS AS WELL
+
+
+## Step 03 - Enhancing the Hellow World REST API to return a Bean
+
+Add a new bean to return from path /hello-world-bean which resolves in the browser as a JSON object
+
+
+## Step 04 - What's happening in the background? Spring Boot Starters and Autoconfign
+
+Why did Spring return a JSON object?
+
+1. how are our requests handled?
+   - DispatcherServlet - front controller pattern - routes requests to the right controller
+   - Mapping servlets - dispatcherServlet urls = [/]
+   - Auto Configuration (DispatcherServletAutoConfiguration)
+
+2. How does HelloWorldBean get converted to JSON?
+  - `@ResponseBody` + `JacksonHttpMessageConverters`
+    - `@RestController` annotation is a combination of multiple other annotations (Cmd + B)
+      ```java
+        @Target({ElementType.TYPE})
+        @Retention(RetentionPolicy.RUNTIME)
+        @Documented
+        @Controller
+        @ResponseBody
+      ```
+  - `JacksonHttpMessageConverters` is automatically configured by Spring-Boot to JSON-ify responses
+
+3. Who is configuring error mapping?
+  - Auto configuration - `ErrorMvcAutoConfiguration` - produces whitelabel errors and pages
+
+4. How are all jars available (Spring, Spring MVC, Jackson, Tomcat)?
+  - because of starter projects and dependencies
+  - Spring Boot Starter Web (spring-webmvc, spring-web, spring-boot-starter-tomcat, spring-boot-starter-json)
+
+
+SERVLET = a servlet is a Java class that extends the capabilities of a server by handling requests and generating responses
+
+
+## Step 05 - Enhancing the Hello World REST API with a Path Variable
+
+Path Parameters / Path Variables
+EX:
+  // /users/{id}/todos/{id} => /users/2/todos/10
+
+  path parameter - the value inside the { curly brackets }
+  path variable - the value passed to the method managing the route with the path parameter
+    i.e. `public String method(@PathVariable String id)`
+
+
+## Step 06 - Designing the REST API for Social Media Application
+
+- Build a REST API for a social media application
+- Key resources:
+  - users
+  - posts
+- Key details:
+  - user: id, name, birthDate
+  - post: id, description
+
+
+
+## Step 07 - Creating User Bean and User DAO Service
+
+
+## Step 08 - Implementing GET methods for user resource
+
+
+## Step 09 - Implementing POST method to create user resource
+
+
 
 
 
